@@ -410,6 +410,14 @@ public class Datasets {
         double bestResult= estimatingTheReesult();
         //a table to show the development of variables on 10,50,100, 200,500, 1000,2000
         int counterTOShowDevelopement=0;
+        // creating an array and initial it with value of 0
+        Map<Integer,Integer> variableStatus = new HashMap<>();
+        for (int x =0; x<numberOfItemsOfSingleRaw();x++){
+            variableStatus.put(x,0);
+        }
+
+        // limit
+        int limit = 100;
         
         while (temp > 1) {
             /**
@@ -418,6 +426,7 @@ public class Datasets {
              * boolean: to be placed in a array to count the
              * int the number by which a limit will be specified to stop call a varibale for further improvement
             */
+
 
             // set temperature, cooling rate and the factor to multiply
             if (counterTOShowDevelopement==0){
@@ -435,60 +444,64 @@ public class Datasets {
                 tableOfFigures.add(conditionsOfExperiment);
             }
             for (int x=0;x<numberOfItemsOfSingleRaw();x++){
-                // is there an improvement variable
-                // todo boolean improvementTricker = false;
-                // System.out.println("the X value is: "+x);
-                /**
-                 *calling the checking function
-                 * if a variable did not show an improvement for a certain times of loops then it will be escaped
-                 * and so the time of computing will be shorten
-                 */
-                try {
-                    // call the a variable x
-                    double oldValueOfTheVariable= getOfTheGetter(x);
-                    // the total estimation before the change
-                    double resultBefor= estimatingTheReesult();
-                    // call random method
-                    double newValueOfTheVariable=giveMeARandom(oldValueOfTheVariable,factorToMultiply);
-                    // check if an improvement is detected by injecting the random in the setter of the (x)
-                    setOfThesetter(x, newValueOfTheVariable);
-                    // compare the two results resultBefore and resultAfter
-                    double resultAfter= estimatingTheReesult();
-                    // call improvementTricker to see if there is an improvement
-                    // todo improvementTricker=newValueOfTheVariable<oldValueOfTheVariable;
-                    // System.out.println("The current value: "+oldValueOfTheVariable+" and the new random one is: "+newValueOfTheVariable+" The Old Value: "+resultBefor +" New value: "+resultAfter);
-                    // if resultBefore greater than result after then keep the change of the random value
-                    // else keep the old value of the variable
-                    if (resultAfter<resultBefor){
-                        /**
-                         * if a variable show an improvement it false recorods will be set to 0
-                        */
+                if (variableStatus.get(x)<limit){
+                    System.out.println("variable" + x + " has a value of "+ variableStatus.get(x));
 
-                    }else{
-                        // System.out.println("No improvement was detected");
-                        // if a random<P then keep the changes
-                        // z is random number < p which is an equation
-                        double zValue= Math.random();
-                        /**
-                         *first I have try to plugin the function values, however the absolute value can be huge and that might lead to p= infinity
-                         * As a result I have taken the values of the variables to be the
-                         */
-                        double pValue= possiblityToAcceptASolution(resultAfter, resultBefor,temp);
-                        //double pValue= generalMethods.possiblityToAcceptASolution(newValueOfTheVariable, oldValueOfTheVariable,temp);
-                        //System.out.println("the value of the random Number is: "+ zValue +" and the value of the p: "+ pValue);
-                        if (zValue<pValue){
-                            //System.out.println("A limited bad result is accepted");
-
-                        }else {
-                            // the old value is set again --> no changes is taking place
-                            setOfThesetter(x,oldValueOfTheVariable);
-                            // as a variable did not show any possible improvement it will get a false
-                            // in case that the false reachs its limit the variable will not be called again to an improvent
-
+                    // is there an improvement variable
+                    // todo boolean improvementTricker = false;
+                    // System.out.println("the X value is: "+x);
+                    /**
+                     *calling the checking function
+                     * if a variable did not show an improvement for a certain times of loops then it will be escaped
+                     * and so the time of computing will be shorten
+                     */
+                    try {
+                        // call the a variable x
+                        double oldValueOfTheVariable= getOfTheGetter(x);
+                        // the total estimation before the change
+                        double resultBefor= estimatingTheReesult();
+                        // call random method
+                        double newValueOfTheVariable=giveMeARandom(oldValueOfTheVariable,factorToMultiply);
+                        // check if an improvement is detected by injecting the random in the setter of the (x)
+                        setOfThesetter(x, newValueOfTheVariable);
+                        // compare the two results resultBefore and resultAfter
+                        double resultAfter= estimatingTheReesult();
+                        // call improvementTricker to see if there is an improvement
+                        // todo improvementTricker=newValueOfTheVariable<oldValueOfTheVariable;
+                        // System.out.println("The current value: "+oldValueOfTheVariable+" and the new random one is: "+newValueOfTheVariable+" The Old Value: "+resultBefor +" New value: "+resultAfter);
+                        // if resultBefore greater than result after then keep the change of the random value
+                        // else keep the old value of the variable
+                        if (resultAfter<resultBefor){
+                            /**
+                             * if a variable show an improvement it false recorods will be set to 0
+                            */
+                            variableStatus.put(x,0);
+                        }else{
+                            // System.out.println("No improvement was detected");
+                            // if a random<P then keep the changes
+                            // z is random number < p which is an equation
+                            double zValue= Math.random();
+                            /**
+                             *first I have try to plugin the function values, however the absolute value can be huge and that might lead to p= infinity
+                             * As a result I have taken the values of the variables to be the
+                             */
+                            double pValue= possiblityToAcceptASolution(resultAfter, resultBefor,temp);
+                            //double pValue= generalMethods.possiblityToAcceptASolution(newValueOfTheVariable, oldValueOfTheVariable,temp);
+                            //System.out.println("the value of the random Number is: "+ zValue +" and the value of the p: "+ pValue);
+                            if (zValue<pValue){
+                                //System.out.println("A limited bad result is accepted");
+                                variableStatus.put(x,0);
+                            }else {
+                                // the old value is set again --> no changes is taking place
+                                setOfThesetter(x,oldValueOfTheVariable);
+                                // as a variable did not show any possible improvement it will get a false
+                                // in case that the false reachs its limit the variable will not be called again to an improvent
+                                variableStatus.put(x,variableStatus.get(x)+1);
+                            }
                         }
-                    }
-                }catch (Exception e){
-                    // System.out.println("there is an error");
+                    }catch (Exception e){
+                        // System.out.println("there is an error");
+                        }
                 }
 
             }

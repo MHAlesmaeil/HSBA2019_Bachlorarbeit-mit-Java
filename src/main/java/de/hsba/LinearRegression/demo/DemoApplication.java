@@ -16,11 +16,11 @@ public class DemoApplication {
          *Test number 1 to select the best temp,cooling rate and factor
          */
         // temprature value needs to be more than one
-       double [] tempratueValues= {1.1, 1.5, 2, 3,5,10};
+       double [] tempratueValues= {3};
         // cooling rate e.g. 0.001
-        double [] coolingRate= {0.1,0.001,0.0001};
+        double [] coolingRate= {0.001};
         // factorToMultiply must be greater than one
-        double [] factorToMultiply= {2,5, 10,100};
+        double [] factorToMultiply= {5};
         for (int x=0;x<tempratueValues.length;x++){
             for (int y=0; y<coolingRate.length;y++){
                 for (int z =0; z<factorToMultiply.length;z++){
