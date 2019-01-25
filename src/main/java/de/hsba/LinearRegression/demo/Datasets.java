@@ -292,7 +292,7 @@ public class Datasets {
                                 try {
                                     result-=(list[rawCount][2])*a2;
                                 }catch (Exception e){}
-                                ;
+
                             }if (numberOfItemsOfSingleRaw()>2){
                                 try {
                                     result-=(list[rawCount][3])*a3;
@@ -332,8 +332,11 @@ public class Datasets {
      * The method giveMeARadom give a random which suppose to give estimated value a chance for better estimation
      */
     public double giveMeARandom (double numberToBeRandomed, double factorToMultiplyWithOriginalOne){
+        // if the number to be randomed is 0, it needs to be adjusted and the best
+        // candidate is the best start values
+        if (numberToBeRandomed==0){numberToBeRandomed=giveMeBestStartValue();}
         // With the variable randomPossitiveOrNegative give a number between -1 and 1
-
+        
         double random = -1* new Random().nextDouble() + 1 * new Random().nextDouble();
         double randomMe = numberToBeRandomed*factorToMultiplyWithOriginalOne* random;
         return randomMe;
@@ -353,6 +356,40 @@ public class Datasets {
         p= (fDiffernce);
         return p;
     }
+    /**
+     * Best start value for all "A" variables
+     * some values will be selected and quickly checked to see which start value
+     * gives the best minimized values
+    */
+    public double giveMeBestStartValue (){
+        double bestStart=0;
+        double bestResult=0;
+        // array with values that need to be checked and of them to be selected as start value
+        double [] possibleValues ={0.0625,0.125,0.25,0.5,1,2,3,4,5,7,10,15,20,30,40, 50, 70, 100, 150,200};
+        // calling the setter of the setter
+        for (int x =0; x < possibleValues.length;x++){
+            // set all A with the value of our array
+            for (int y = 0; y<numberOfItemsOfSingleRaw();y++){
+                setOfThesetter(y,possibleValues[x]);
+            }
+            // check the result
+            if (x==0){
+                // first result
+                bestResult= estimatingTheReesult();
+                bestStart= possibleValues[x];
+            }else{
+                // if new result smaller than the best then new result = best result
+                if (estimatingTheReesult()<bestResult){
+                    bestResult = estimatingTheReesult();
+                    bestStart= possibleValues[x];
+                }
+
+            }
+        }
+        return bestStart;
+
+    }
+
 
     /**
      *
@@ -382,16 +419,12 @@ public class Datasets {
         /**
          * rest the values of the variables for the next round
         */
-        double bVariable=100;
-        double a1=100;
-        double a2=100;
-        double a3=100;
-        double a4=100;
-        double a5=100;
-        double a6=100;
-        double a7=100;
-        double a8=100;
-        double a9=100;
+        double bestStart = giveMeBestStartValue();
+        System.out.println("her eis the sdouzb" +  bestStart);
+        for(int xxx=0; xxx<numberOfItemsOfSingleRaw();xxx++){
+                      setOfThesetter(xxx,bestStart);
+        }
+
 
         /**
          *
@@ -417,7 +450,7 @@ public class Datasets {
         }
 
         // limit
-        int limit = 100;
+        int limit = 1000;
         
         while (temp > 1) {
             /**
@@ -445,7 +478,7 @@ public class Datasets {
             }
             for (int x=0;x<numberOfItemsOfSingleRaw();x++){
                 if (variableStatus.get(x)<limit){
-                    System.out.println("variable" + x + " has a value of "+ variableStatus.get(x));
+                    //System.out.println("variable" + x + " has a value of "+ variableStatus.get(x));
 
                     // is there an improvement variable
                     // todo boolean improvementTricker = false;

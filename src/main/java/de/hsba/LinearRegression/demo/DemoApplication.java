@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class DemoApplication {
 
 	public static void main(String[] args) {
-		Datasets dataset = new Datasets(2);
+		Datasets dataset = new Datasets(3);
 
         /*
         dataset.setbVariable(120);
@@ -16,11 +16,11 @@ public class DemoApplication {
          *Test number 1 to select the best temp,cooling rate and factor
          */
         // temprature value needs to be more than one
-       double [] tempratueValues= {3};
+       double [] tempratueValues= {2};
         // cooling rate e.g. 0.001
-        double [] coolingRate= {0.001};
+        double [] coolingRate= {0.0001};
         // factorToMultiply must be greater than one
-        double [] factorToMultiply= {5};
+        double [] factorToMultiply= {2};
         for (int x=0;x<tempratueValues.length;x++){
             for (int y=0; y<coolingRate.length;y++){
                 for (int z =0; z<factorToMultiply.length;z++){
