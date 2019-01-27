@@ -471,7 +471,7 @@ public class Implementation {
                 tableOfFigures.add(start);
                 tableOfFigures.add(start);
                 // the form of "|" is used to be able to work filter the data on excel
-                String conditionsOfExperiment="Best_Start_Value| "+bestStart+" |The_original_temperature| "+temp+" | the_cooling_rate| "+ coolingRate+"| the_factor_to_multiply_with| "+ factorToMultiply+ "| The Variable limit | "+limit ;
+                String conditionsOfExperiment="Best_Start_Value| "+bestStart+" |The_start_temperature| "+temp+" | the_cooling_rate| "+ coolingRate+"| the_factor_to_multiply_with| "+ factorToMultiply+ "| The Variable limit | "+limit ;
                 conditionsOfExperiment=conditionsOfExperiment.replace(".",",");
 
                 tableOfFigures.add(conditionsOfExperiment);
