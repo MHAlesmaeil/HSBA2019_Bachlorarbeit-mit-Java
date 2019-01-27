@@ -6,18 +6,21 @@ import java.util.*;
  *  this class contains the datasets
  *  3 data sets exist and need to be specified once the instance of this class is being created
 */
-public class Datasets {
-
+public class Implementation {
+    // list for data set
     double[][] list;
-
-    public Datasets(int dataset) {
+    // if a variable show no improvement within limit, the function stop calling it for further improvement
+    int limit = 1000;
+    // if true was selected, the comments of developer will be shown in console. Default is false
+    public boolean showComments = false;
+    // constructor
+    public Implementation(int dataset, boolean showComments, int limit) {
         selectDataSet(dataset);
+        this.showComments= showComments;
+        this.limit= limit;
     }
 
-
-    /**
-     * constrcutor
-    */
+    // select data set
     public void  selectDataSet (int dataSet) {
         if (dataSet<4 && dataSet>0){
             if (dataSet==1)
@@ -27,21 +30,26 @@ public class Datasets {
             else if (dataSet==3)
                 list =complexDataset;
         }else{
-            System.out.println("The list you specified does not exist");
+            // show comment of the developer
+            if (showComments==true){
+                System.out.println("The list you specified does not exist");
+            }
+
         }
     }
-
-
+    /**
+     * the first elemet of a row represents the "y" value and the rest are "x"s
+    */
+    
     // simple data set
-    public double [][] simpleDataSet=
-            {{140,20,18,0},
-            {136,10,0,1},
-            {94,5,24,0},
-            {190,22,0,1}};
+    public double [][] simpleDataSet={
+            {136,10},
+            {161,26}
+    };
 
     // a bit complex data set
-    public double[][] bitComplexDataSet =
-            {{140,20,18,0},
+    public double[][] bitComplexDataSet ={
+            {140,20,18,0},
             {136,10,0,1},
             {94,5,24,0},
             {190,22,0,1},
@@ -53,50 +61,68 @@ public class Datasets {
             {181,34,18,1},
             {176,18,0,1},
             {128,4,24,0},
-};
-
+    };
+    
     // complex data set
-    public double[][] complexDataset =
-            {{7490,61000,80,2010,1},
-            {7990,36036,75,2009,1},
-            {8250,40985,80,2010,1},
-            {8900,6400,75,2013,0},
-            {9950,49900,75,2011,0},
-            {10950,19420,80,2013,1},
-            {10975,48000,102,2012,1},
-            {11790,47600,116,2011,1},
-            {12990,49800,105,2012,0},
-            {13490,43425,102,2014,0},
-            {13800,26720,102,2014,1},
-            {13900,7000,80,2016,0},
-            {14975,24623,80,2016,0},
-            {14995,4850,80,2015,1},
-            {15900,8600,80,2015,1},
-            {17400,48000,105,2013,0},
-            {17829,26500,105,2015,0},
-            {18450,11879,110,2015,1},
-            {18980,8287,102,2016,1},
-            {18990,25500,122,2014,0},
-            {19229,9500,105,2015,1},
-            {19490,12934,122,2014,0},
-            {19900,20964,160,2014,0},
-            {19900,17000,105,2016,1},
-            {21200,6000,105,2016,0},
-            {22500,40000,300,2011,1},
-            {22650,42500,140,2015,0},
-            {23870,15126,160,2016,1},
-            {23900,37300,230,2013,0},
-            {23987,17512,200,2013,0},
-            {25990,8105,140,2016,0},
-            {28890,16466,211,2015,0},
-            {29490,31500,170,2015,0},
-            {44540,5000,271,2016,0}};
-
+    // refer to: https://www.superdatascience.com/machine-learning/Multiple_Linear_Regression.zip
+    public double[][] complexDataset ={
+            {192261.83,0,1,165349,136898,471784},
+            {191792.06,0,0,162598,151378,443899},
+            {191050.39,1,0,153442,101146,407935},
+            {182901.99,0,1,144372,118672,383200},
+            {166187.94,1,0,142107,91391.8,366168},
+            {156991.12,0,1,131877,99814.7,362861},
+            {156122.51,0,0,134615,147199,127717},
+            {155752.6,1,0,130298,145530,323877},
+            {152211.77,0,1,120543,148719,311613},
+            {149759.96,0,0,123335,108679,304982},
+            {146121.95,1,0,101913,110594,229161},
+            {144259.4,0,0,100672,91790.6,249745},
+            {141585.52,1,0,93863.8,127320,249839},
+            {134307.35,0,0,91992.4,135495,252665},
+            {132602.65,1,0,119943,156547,256513},
+            {129917.04,0,1,114524,122617,261776},
+            {126992.93,0,0,78013.1,121598,264346},
+            {125370.37,0,1,94657.2,145078,282574},
+            {124266.9,1,0,91749.2,114176,294920},
+            {122776.86,0,1,86419.7,153514,0},
+            {118474.03,0,0,76253.9,113867,298664},
+            {111313.02,0,1,78389.5,153773,299737},
+            {110352.25,1,0,73994.6,122783,303319},
+            {108733.99,1,0,67532.5,105751,304769},
+            {108552.04,0,1,77044,99281.3,140575},
+            {107404.34,0,0,64664.7,139553,137963},
+            {105733.54,1,0,75328.9,144136,134050},
+            {105008.31,0,1,72107.6,127865,353184},
+            {103282.38,1,0,66051.5,182646,118148},
+            {101004.64,0,1,65605.5,153032,107138},
+            {99937.59,1,0,61994.5,115641,91131.2},
+            {97483.56,0,1,61136.4,152702,88218.2},
+            {97427.84,0,0,63408.9,129220,46085.2},
+            {96778.92,1,0,55493.9,103057,214635},
+            {96712.8,0,0,46426.1,157694,210798},
+            {96479.51,0,1,46014,85047.4,205518},
+            {90708.19,1,0,28663.8,127056,201127},
+            {89949.14,0,0,44069.9,51283.1,197029},
+            {81229.06,0,1,20229.6,65947.9,185265},
+            {81005.76,0,0,38558.5,82982.1,174999},
+            {78239.91,0,0,28754.3,118546,172796},
+            {77798.83,1,0,27892.9,84710.8,164471},
+            {71498.49,0,0,23640.9,96189.6,148001},
+            {69758.98,0,1,15505.7,127382,35534.2},
+            {65200.33,0,0,22177.7,154806,28334.7},
+            {64926.08,0,1,1000.23,124153,1903.93},
+            {49490.75,1,0,1315.46,115816,297114},
+            {42559.73,0,0,0,135427,0},
+            {35673.41,0,1,542.05,51743.2,0},
+            {14681.4,0,0,0,116984,45173.1}
+    };
     /**
      * ### SECTION 1: SIMPLE METHODS ###########
-    * General methods for the data set
+    * General methods for information about the data set
     */
-    public int numberOfRaws() {
+    // Number of row in a data set
+    public int numberOfRows() {
         if (list != null) {
             return list.length;
         } else {
@@ -104,7 +130,8 @@ public class Datasets {
         }
     }
     // return how many elements in the first row
-    public int numberOfItemsOfSingleRaw() {
+    // We assume  that all rows are compelete with no text input
+    public int numberOfItemsOfSingleRow() {
         if (list != null) {
             double[] temp = list[0];
             return temp.length;
@@ -116,7 +143,7 @@ public class Datasets {
     /**
      * ######## SECTION 2: VARIABLES #################
      * Methods to calculate the result
-     * the initial value of all "A" and "B" is 1
+     * the initial value of all "A" and "B" is 1, however, this value is going to be adjusted with "giveMeBestStartValue" function
     */
     double bVariable=1;
     double a1=1;
@@ -129,7 +156,7 @@ public class Datasets {
     double a8=1;
     double a9=1;
     /**
-     * getter and setter of the A and B
+     * getter and setter of the "A"s and "B"
     */
     public double getbVariable() {
         return bVariable;
@@ -212,13 +239,11 @@ public class Datasets {
     }
     /**##### SECTION 3: METHODS FOR VARIABLES ###########
      * Setter and getter switcher
-     * this method is going to be used to optimize a single
-     * instand of hard coding calling the setter and getter of each variable
-     * we could do the same be calling the first one when the switcher on 1 and 2nd when the
-     * switcher on 2 and so on and so forth
+     * this method is going to be used to optimize calling of setter and getter
+     * instead of hard coding each of them
     */
     public void setOfThesetter (int x, double theNewValue){
-        if (x<=numberOfItemsOfSingleRaw()){
+        if (x<= numberOfItemsOfSingleRow()){
             if (x==0)
                 setbVariable(theNewValue);
             else if (x==1)
@@ -240,11 +265,15 @@ public class Datasets {
             else if (x==9)
                 setA9(theNewValue);
         }else{
-            System.out.println("Check the number of ITEM you are calling");
+            // show comment of the developer
+            if (showComments==true){
+                System.out.println("Check the number of ITEM you are calling");
+            }
+
         }
     }
     public double getOfTheGetter (int x){
-        if (x <= numberOfItemsOfSingleRaw()){
+        if (x <= numberOfItemsOfSingleRow()){
             double value=0;
             if (x==0)
                 value= getbVariable();
@@ -271,57 +300,56 @@ public class Datasets {
             return 0;
         }
     }
-
-
     /**
      * ########## SECTION 4: ESTIMATING THE RESULT ##########
      * estimating the result for up to 9 variables
     */
     public double estimatingTheReesult(){
         double accumilatedReslt=0;
-        for (int rawCount=0; rawCount<numberOfRaws();rawCount++){
+        for (int rowCounter = 0; rowCounter< numberOfRows(); rowCounter++){
             double result =0;
-                    result+=(list[rawCount][0]);
-                            if (numberOfItemsOfSingleRaw()>0){
+                    // Add the value of "y" to the result
+                    result+=(list[rowCounter][0]);
+                            // If number of raws are greater than 1 etc. for other if statement
+                            if (numberOfItemsOfSingleRow()>0){
                                 try {
                                     result-=bVariable;
-                                    result-=(list[rawCount][1])*a1;
+                                    result-=(list[rowCounter][1])*a1;
                                 }catch (Exception e){}
 
-                            }if (numberOfItemsOfSingleRaw()>1){
+                            }if (numberOfItemsOfSingleRow()>1){
                                 try {
-                                    result-=(list[rawCount][2])*a2;
+                                    result-=(list[rowCounter][2])*a2;
                                 }catch (Exception e){}
 
-                            }if (numberOfItemsOfSingleRaw()>2){
+                            }if (numberOfItemsOfSingleRow()>2){
                                 try {
-                                    result-=(list[rawCount][3])*a3;
+                                    result-=(list[rowCounter][3])*a3;
                                 }catch (Exception e){}
-                            }if (numberOfItemsOfSingleRaw()>3){
+                            }if (numberOfItemsOfSingleRow()>3){
                                 try {
-                                    result-=(list[rawCount][4])*a4;
+                                    result-=(list[rowCounter][4])*a4;
                                 }catch (Exception e){}
-                            }if (numberOfItemsOfSingleRaw()>4){
+                            }if (numberOfItemsOfSingleRow()>4){
                                 try {
-                                    result-=(list[rawCount][5])*a5;
+                                    result-=(list[rowCounter][5])*a5;
                                 }catch (Exception e){}
-                            }if (numberOfItemsOfSingleRaw()>5){
+                            }if (numberOfItemsOfSingleRow()>5){
                                 try {
-                                    result-=(list[rawCount][6])*a6;
+                                    result-=(list[rowCounter][6])*a6;
                                 }catch (Exception e){}
-                            }if (numberOfItemsOfSingleRaw()>6){
+                            }if (numberOfItemsOfSingleRow()>6){
                                 try {
-                                    result-=(list[rawCount][7])*a7;
+                                    result-=(list[rowCounter][7])*a7;
                                 }catch (Exception e){}
-                            }if (numberOfItemsOfSingleRaw()>7){
+                            }if (numberOfItemsOfSingleRow()>7){
                                 try {
-                                    result-=(list[rawCount][8])*a8;
+                                    result-=(list[rowCounter][8])*a8;
                                 }catch (Exception e){}
-                            }if (numberOfItemsOfSingleRaw()>8) {
+                            }if (numberOfItemsOfSingleRow()>8) {
                                 try {
-                                    result -= (list[rawCount][9]) * a9;
-                                } catch (Exception e) {
-                                }
+                                    result -= (list[rowCounter][9]) * a9;
+                                } catch (Exception e){}
                             }
             accumilatedReslt += Math.pow(result,2);
         }
@@ -329,14 +357,13 @@ public class Datasets {
     }
     /**
      * #################### SECTION 5: METHOD NEEDED FROM SIMULATED ANNEALING #########################
-     * The method giveMeARadom give a random which suppose to give estimated value a chance for better estimation
      */
+    // giveMeARandom give a random for "numberToBeRandomed
     public double giveMeARandom (double numberToBeRandomed, double factorToMultiplyWithOriginalOne){
-        // if the number to be randomed is 0, it needs to be adjusted and the best
-        // candidate is the best start values
+        // if the number "numberToBeRandomed" is 0, it needs to be adjusted
+        // to a better value which is the "giveMeBestStartValue"
         if (numberToBeRandomed==0){numberToBeRandomed=giveMeBestStartValue();}
-        // With the variable randomPossitiveOrNegative give a number between -1 and 1
-        
+        // random needs chance to be also negative
         double random = -1* new Random().nextDouble() + 1 * new Random().nextDouble();
         double randomMe = numberToBeRandomed*factorToMultiplyWithOriginalOne* random;
         return randomMe;
@@ -364,12 +391,12 @@ public class Datasets {
     public double giveMeBestStartValue (){
         double bestStart=0;
         double bestResult=0;
-        // array with values that need to be checked and of them to be selected as start value
+        // array with values that needs to be checked and one of them needs to be selected as start value
         double [] possibleValues ={0.0625,0.125,0.25,0.5,1,2,3,4,5,7,10,15,20,30,40, 50, 70, 100, 150,200};
         // calling the setter of the setter
         for (int x =0; x < possibleValues.length;x++){
-            // set all A with the value of our array
-            for (int y = 0; y<numberOfItemsOfSingleRaw();y++){
+            // set all "A"s and "B" with the value of our array
+            for (int y = 0; y< numberOfItemsOfSingleRow(); y++){
                 setOfThesetter(y,possibleValues[x]);
             }
             // check the result
@@ -378,59 +405,32 @@ public class Datasets {
                 bestResult= estimatingTheReesult();
                 bestStart= possibleValues[x];
             }else{
-                // if new result smaller than the best then new result = best result
+                // if new result here smaller than the best then new result := best result
                 if (estimatingTheReesult()<bestResult){
                     bestResult = estimatingTheReesult();
                     bestStart= possibleValues[x];
                 }
-
             }
         }
         return bestStart;
-
     }
-
-
-    /**
-     *
-    */
-    public boolean blockVariable;
-
-    public boolean isBlockVariable() {
-        return blockVariable;
-    }
-
-    public void setBlockVariable(boolean blockVariable) {
-        this.blockVariable = blockVariable;
-    }
-
-
-
-
-    
-
     /**
      * ########## SECTION 6: OPTIMIZATION OF A & B ################
      */
     // variables which needed for simulated annealing
-    
     public void optimizationOfAandB (double temp, double coolingRate,double factorToMultiply){
-
-        /**
-         * rest the values of the variables for the next round
-        */
+        // start time
+        long startTime = System.nanoTime();
+        // result of "giveMeBestStart"
         double bestStart = giveMeBestStartValue();
-        System.out.println("her eis the sdouzb" +  bestStart);
-        for(int xxx=0; xxx<numberOfItemsOfSingleRaw();xxx++){
-                      setOfThesetter(xxx,bestStart);
+        // show comment of the developer
+        if (showComments==true){
+            System.out.println("The selected start point is: " +  bestStart);
         }
-
-
-        /**
-         *
-        */
-
-
+        // set variables with bestStart value
+        for(int xStartpoint = 0; xStartpoint< numberOfItemsOfSingleRow(); xStartpoint++){
+                      setOfThesetter(xStartpoint,bestStart);
+        }
         /**
          * ############### ORGANIZATION STAFF #############
          * here are staff that is going to be used to print out data in certain style
@@ -439,19 +439,20 @@ public class Datasets {
         String bestRecord="";
         // list to keep the records in certain loop
         List<String> tableOfFigures = new ArrayList<String>();
-        // local variable to be compare with the new result if the new estimation of the result is smaller than this value the best record will be saved
+        // Estimate the best result
         double bestResult= estimatingTheReesult();
-        //a table to show the development of variables on 10,50,100, 200,500, 1000,2000
+        // A table to show the development of variables on loop# 10,50,100, 200,500, 1000,2000
         int counterTOShowDevelopement=0;
         // creating an array and initial it with value of 0
         Map<Integer,Integer> variableStatus = new HashMap<>();
-        for (int x =0; x<numberOfItemsOfSingleRaw();x++){
+        for (int x = 0; x< numberOfItemsOfSingleRow(); x++){
             variableStatus.put(x,0);
         }
+        // once breakProcess is true, processing will stop in the second round
+        boolean breakProcess= false;
 
-        // limit
-        int limit = 1000;
-        
+
+        // temprature needs to be above 1
         while (temp > 1) {
             /**
              * The funciton doesVaribleShowImprovement takes two arguments
@@ -461,7 +462,7 @@ public class Datasets {
             */
 
 
-            // set temperature, cooling rate and the factor to multiply
+            // Print out the header of the table of records with set temperature, cooling rate, the factor to multiply and limit
             if (counterTOShowDevelopement==0){
                 String verticalSpace="";
                 String start="###########################################################";
@@ -469,25 +470,29 @@ public class Datasets {
                 tableOfFigures.add(verticalSpace);
                 tableOfFigures.add(start);
                 tableOfFigures.add(start);
-                /**
-                 *the form of "|" is used to be able to work filter the data on excel
-                 */
-                String conditionsOfExperiment="The_original_temperature| "+temp+" | the_cooling_rate| "+ coolingRate+"| the_factor_to_multiply_with| "+ factorToMultiply;
+                // the form of "|" is used to be able to work filter the data on excel
+                String conditionsOfExperiment="Best_Start_Value| "+bestStart+" |The_original_temperature| "+temp+" | the_cooling_rate| "+ coolingRate+"| the_factor_to_multiply_with| "+ factorToMultiply+ "| The Variable limit | "+limit ;
                 conditionsOfExperiment=conditionsOfExperiment.replace(".",",");
+
                 tableOfFigures.add(conditionsOfExperiment);
             }
-            for (int x=0;x<numberOfItemsOfSingleRaw();x++){
-                if (variableStatus.get(x)<limit){
-                    //System.out.println("variable" + x + " has a value of "+ variableStatus.get(x));
+            for (int x = 0; x< numberOfItemsOfSingleRow(); x++){
 
-                    // is there an improvement variable
-                    // todo boolean improvementTricker = false;
-                    // System.out.println("the X value is: "+x);
-                    /**
-                     *calling the checking function
-                     * if a variable did not show an improvement for a certain times of loops then it will be escaped
-                     * and so the time of computing will be shorten
-                     */
+                // if one variables is still under the limit, process contine
+                for (int variablesCheck = 0; variablesCheck< numberOfItemsOfSingleRow(); variablesCheck++ ){
+                    // if all are false then temprature=1 and break the process
+                    if (variableStatus.get(variablesCheck)<limit){
+                        //System.out.println("there is an element which did not reach the limit and it is"+ x);
+                        breakProcess = false;
+                    }
+                }
+                // if variable is within the set limit
+                if (variableStatus.get(x)<limit){
+                    // show comment of the developer
+                    if (showComments==true){
+                        System.out.println("variable " + x + " has a value of "+ variableStatus.get(x));
+                    }
+
                     try {
                         // call the a variable x
                         double oldValueOfTheVariable= getOfTheGetter(x);
@@ -499,50 +504,81 @@ public class Datasets {
                         setOfThesetter(x, newValueOfTheVariable);
                         // compare the two results resultBefore and resultAfter
                         double resultAfter= estimatingTheReesult();
-                        // call improvementTricker to see if there is an improvement
-                        // todo improvementTricker=newValueOfTheVariable<oldValueOfTheVariable;
-                        // System.out.println("The current value: "+oldValueOfTheVariable+" and the new random one is: "+newValueOfTheVariable+" The Old Value: "+resultBefor +" New value: "+resultAfter);
-                        // if resultBefore greater than result after then keep the change of the random value
-                        // else keep the old value of the variable
+                        // show comment of the developer
+                        if (showComments==true){
+                            System.out.println("The current value: "+oldValueOfTheVariable+
+                                                " and the new random one is: "+newValueOfTheVariable+
+                                                " The Old Value: "+resultBefor +" New value: "+resultAfter);
+                        }
+                        // if resultAfter smaller than resultBefore then keep changes
+                        // else: reverse if statement
                         if (resultAfter<resultBefor){
-                            /**
-                             * if a variable show an improvement it false recorods will be set to 0
-                            */
+                            // if a variable shows an improvement, it records will be reset to 0
                             variableStatus.put(x,0);
+                            /**
+                             * if a random of a variable has shown a positive progress
+                             * it will be given another chance to
+                             * use the same absolute value once again to the old value
+                            */
+                            double trySameValue = Math.abs(oldValueOfTheVariable-newValueOfTheVariable);
+                            // call the setter and add the trySameVaue to the exist one
+                            setOfThesetter(x, getOfTheGetter(x)+trySameValue);
+                            // Get the new result
+                            double resulTrySameValue = estimatingTheReesult();
+                                // as long as the difference shows improvement in the result keep improve the result
+                                while (resulTrySameValue<resultAfter){
+                                    setOfThesetter(x, getOfTheGetter(x)+trySameValue);
+                                    resultAfter= resulTrySameValue;
+                                    resulTrySameValue= estimatingTheReesult();
+                                    // show comment of the developer
+                                    if (showComments==true){
+                                        System.out.println("2nd chanance where given to variable number "+ (x+1));
+                                    }
+                                }
+                                setOfThesetter(x,getOfTheGetter(x)-trySameValue);
+                            // show comment of the developer
+                            if (showComments==true){
+                                System.out.println("No more improvement was detected");
+                            }
+
                         }else{
-                            // System.out.println("No improvement was detected");
+                            // show comment of the developer
+                            if (showComments==true){
+                               System.out.println("No improvement was detected");
+                            }
                             // if a random<P then keep the changes
                             // z is random number < p which is an equation
                             double zValue= Math.random();
-                            /**
-                             *first I have try to plugin the function values, however the absolute value can be huge and that might lead to p= infinity
-                             * As a result I have taken the values of the variables to be the
-                             */
+                            // calculte p value
                             double pValue= possiblityToAcceptASolution(resultAfter, resultBefor,temp);
-                            //double pValue= generalMethods.possiblityToAcceptASolution(newValueOfTheVariable, oldValueOfTheVariable,temp);
-                            //System.out.println("the value of the random Number is: "+ zValue +" and the value of the p: "+ pValue);
+                            // show comment of the developer
+                            if (showComments==true){
+                                System.out.println("the value of the random Number is: "+ zValue +" and the value of the p: "+ pValue);
+                            }
+                            // if true do not reverse the changes which have been made in if statement
                             if (zValue<pValue){
-                                //System.out.println("A limited bad result is accepted");
+                                // show comment of the developer
+                                if (showComments==true){
+                                    System.out.println("A limited bad result is accepted");
+                                }
+                                // tricker for variable limit
                                 variableStatus.put(x,0);
                             }else {
                                 // the old value is set again --> no changes is taking place
                                 setOfThesetter(x,oldValueOfTheVariable);
-                                // as a variable did not show any possible improvement it will get a false
-                                // in case that the false reachs its limit the variable will not be called again to an improvent
+                                // as a variable did not show any possible improvement, it will get a false
+                                // in case that the false reaches the set limit, the variable will not be called again for a new improvement
                                 variableStatus.put(x,variableStatus.get(x)+1);
                             }
                         }
-                    }catch (Exception e){
-                        // System.out.println("there is an error");
-                        }
+                    }catch (Exception e){}
                 }
-
             }
             // getting the best result
             if (estimatingTheReesult()<bestResult){
                 bestResult= estimatingTheReesult();
                 bestRecord="Best_Loop# "+counterTOShowDevelopement;
-                for (int x=0; x<numberOfItemsOfSingleRaw();x++){
+                for (int x = 0; x< numberOfItemsOfSingleRow(); x++){
                     if (x==0){
                         bestRecord +="|B|"+ getOfTheGetter(x);
                     }else{
@@ -567,7 +603,7 @@ public class Datasets {
                     counterTOShowDevelopement==5000||
                     counterTOShowDevelopement==10000){
                 String s="Loop# "+counterTOShowDevelopement;
-                for (int x=0; x<numberOfItemsOfSingleRaw();x++){
+                for (int x = 0; x< numberOfItemsOfSingleRow(); x++){
                     if (x==0){
                         s +="|B|"+ getOfTheGetter(x);
                     }else{
@@ -579,28 +615,40 @@ public class Datasets {
                 s=s.replace(".",",");
                 tableOfFigures.add(s);
             }
+            // if this value was change over, it will break the process
+            if (breakProcess==true){
+                // show comment of the developer
+                if (showComments==true){
+                    System.out.println("function has been stopped as all variables have reached their set limit");
+                }
+                temp = 1;
+            }
             temp *= 1-coolingRate;
+            // this value need to change over if there is any element has not reach its limit
+            breakProcess = true;
         }
-        // showing the result that was gathered through the loop
+        // showing the result that was gathered through the loops
         for (String singleString: tableOfFigures){
             System.out.println(singleString);
         }
         // show the final loop result
-
-        String finalLoop="Best_Loop# "+counterTOShowDevelopement;
-        for (int x=0; x<numberOfItemsOfSingleRaw();x++){
+        String finalLoop="The_Final_Loop# "+counterTOShowDevelopement;
+        for (int x = 0; x< numberOfItemsOfSingleRow(); x++){
             if (x==0){
                 finalLoop +="|B|"+ getOfTheGetter(x);
             }else{
                 finalLoop +="|A"+x+"|"+ getOfTheGetter(x);
             }
         }
+        // Print out the rest of the result
         finalLoop +="|FunctionValue| "+ estimatingTheReesult();
         finalLoop= finalLoop.replace(".",",");
         System.out.println(finalLoop);
         // Print out the best record that was noticed
         System.out.println("###############");
-        System.out.println("The_Best_Record, Data_and_Time: "+ new Date());
+        long endTime = System.nanoTime();
+        long totalTime= endTime-startTime;
+        System.out.println("The_Best_Record, Total Time of Execution in ms: "+ totalTime/1000000);
         System.out.println("###############");
         System.out.println(bestRecord.replace(".",","));
     }
