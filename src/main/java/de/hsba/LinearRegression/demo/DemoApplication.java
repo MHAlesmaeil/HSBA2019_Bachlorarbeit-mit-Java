@@ -11,11 +11,11 @@ public class DemoApplication {
          * 2. ShowComment: select true to show the comments of the developer. It will be recommended to select dataset number 1.
          * 3. Limit: when a variable does not show any improvement for a certain number of time on a row with in the limit, it will not be called again for further development
 	    */
-		Implementation dataset = new Implementation(3, false,1000);
+		Implementation dataset = new Implementation(3, false,2000);
 
 
         // temprature value needs to be more than one
-       double [] tempratueValues= {2,5,10,20, 50};
+       double [] tempratueValues= {2,5,10};
         // cooling rate e.g. 0.001
         double [] coolingRate= {0.00001, 0.0001, 0.001};
         // factorToMultiply must be greater than one
@@ -27,15 +27,6 @@ public class DemoApplication {
                 }
             }
         }
-        // excel values of set 2
-        /*dataset.setbVariable(100.329);
-        dataset.setA1(2);
-        dataset.setA2(0.007);
-        dataset.setA3(30.026);
-        System.out.println("Excel calculation is: "+ dataset.estimatingTheReesult());*/
-
 	}
-
-
 }
 
