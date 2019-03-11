@@ -44,8 +44,7 @@ public class PseudoCode {
      * ##################################################################
      * #################################################################
      *  Function name: optmizationOfAandB
-     *  Function description: This function tries to optimize the A and B through the flowing:
-     *  1-
+     *  Function description: This function tries to optimize the A and B.
      * ###############################################################
      *  public void optimizationOfAandB(double temp, double coolingRate, double vectorToMultiplyWith)
      *         long startTime = System.nanoTime()
@@ -108,9 +107,6 @@ public class PseudoCode {
      *             breakProcess = TRUE
      *         ENDWHILE
      * }
-     *
-     *
-     *
     */
 }
 
