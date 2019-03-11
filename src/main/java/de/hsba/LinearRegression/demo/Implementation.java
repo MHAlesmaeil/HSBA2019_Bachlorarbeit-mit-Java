@@ -13,12 +13,14 @@ public class Implementation {
     int limit = 1000;
     // if true was selected, the comments of developer will be shown in console. Default is false
     public boolean showComments = false;
-
+    // Limit of chances to improve a a variable
+    int limitToStopSecondChance;
     // constructor
-    public Implementation(int dataset, boolean showComments, int limit) {
+    public Implementation(int dataset, boolean showComments, int limit, int limitToStopSecondChance) {
         selectDataset(dataset);
         this.showComments = showComments;
         this.limit = limit;
+        this.limitToStopSecondChance = limitToStopSecondChance;
     }
 
     // select data set | Expected dataset value = {1,2,3}
@@ -391,9 +393,7 @@ public class Implementation {
         if (numberToBeRandomed == 0) {
             numberToBeRandomed = determineBestStart();
         }
-        // random needs chance to be also negative
-        double random = -1 * new Random().nextDouble() + 1 * new Random().nextDouble();
-        double randomMe = numberToBeRandomed * vectorToMultiplyWithOriginalOne * random;
+        double randomMe = numberToBeRandomed * vectorToMultiplyWithOriginalOne * new Random().nextDouble();
         return randomMe;
     }
 
@@ -554,8 +554,10 @@ public class Implementation {
                             setOfsetter(x, getOfGetter(x) + trySameValue);
                             // Get the new result
                             double resulTrySameValue = estimateReesult();
-                            // as long as the difference shows improvement in the result keep improve the result
-                            while (resulTrySameValue < resultAfter) {
+                            // a second chance would be given to the variable to improve itself
+                            int limitOfVarible =0;
+                            while (resulTrySameValue < resultAfter && limitOfVarible <limitToStopSecondChance ) {
+
                                 setOfsetter(x, getOfGetter(x) + trySameValue);
                                 resultAfter = resulTrySameValue;
                                 resulTrySameValue = estimateReesult();
@@ -563,6 +565,7 @@ public class Implementation {
                                 if (showComments == true) {
                                     System.out.println("2nd chanance where given to variable number " + (x + 1));
                                 }
+                                limitOfVarible ++;
                             }
                             setOfsetter(x, getOfGetter(x) - trySameValue);
                             // show comment of the developer
