@@ -4,25 +4,25 @@ public class PseudoCode {
 
 
     /**
-     * In this class, selected function would be written in Pseudocode
+     * In this class, selected functions would be written in Pseudocode
      * ###############################################################
      * ###############################################################
      * Function name: giveRandom
      * Function description: This function generates a random. In case that the variable which is needed to be randomize is equal to zero, the best start value will be assigned to the variable
      * ###############################################################
-     *  public double giveRandom(double numberToBeRandomed, double vectorToMultiplyWithOriginalOne)
+     *  public double giveRandom(double numberToBeRandomed, double vectorToMultiplyWithOriginalOne){
      *         IF (numberToBeRandomed == 0)
      *             numberToBeRandomed = determineBestStart()
      *         ENDIF
      *         double randomMe = numberToBeRandomed * vectorToMultiplyWithOriginalOne * new Random().nextDouble()
      *         RETURN randomMe
-     *
+     * }
      * #################################################################
      * #################################################################
      * Function name: determineBestStart
      * Function description: This function helps to find the best start value, as no start value is assigned.
      * ###############################################################
-     *  public double determineBestStart()
+     *  public double determineBestStart(){
      *         double bestStart = 0
      *         double bestResult = 0
      *         double[] possibleValues = {0.0625, 0.125, 0.25, 0.5, 1, 2, 3, 4, 5, 7, 10, 15, 20, 30, 40, 50, 70, 100, 150, 200}
@@ -41,12 +41,13 @@ public class PseudoCode {
      *             ENDIF
      *         ENDFOR
      *         RETURN bestStart
+     *  }
      * ##################################################################
      * #################################################################
      *  Function name: optmizationOfAandB
      *  Function description: This function tries to optimize the A and B.
      * ###############################################################
-     *  public void optimizationOfAandB(double temp, double coolingRate, double vectorToMultiplyWith)
+     *  public void optimizationOfAandB(double temp, double coolingRate, double vectorToMultiplyWith){
      *         long startTime = System.nanoTime()
      *         double bestStart = determineBestStart()
      *         FOR (int xStartpoint = 0; xStartpoint < numberOfItemsOfSingleRow(); xStartpoint++)
@@ -73,7 +74,7 @@ public class PseudoCode {
      *                         double newValueOfTheVariable = giveRandom(oldValueOfTheVariable, vectorToMultiplyWith);
      *                         setOfsetter(x, newValueOfTheVariable)
      *                         double resultAfter = estimateReesult()
-     *                         if (resultAfter < resultBefor)
+     *                         IF (resultAfter < resultBefor)
      *                             variableStatus.put(x, 0)
      *                             double trySameValue = Math.abs(oldValueOfTheVariable - newValueOfTheVariable);
      *                             setOfsetter(x, getOfGetter(x) + trySameValue)
@@ -95,6 +96,7 @@ public class PseudoCode {
      *                                 setOfsetter(x, oldValueOfTheVariable)
      *                                 variableStatus.put(x, variableStatus.get(x) + 1)
      *                             ENDIF
+     *                        ENDIF
      *                     ENDTRY
      *                     CATCH (Exception e)
      *                     ENDCATCH

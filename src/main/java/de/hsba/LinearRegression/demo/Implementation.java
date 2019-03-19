@@ -10,16 +10,16 @@ public class Implementation {
     // list for data set
     double[][] list;
     // if a variable show no improvement within limit, the function stop calling it for further improvement
-    int limit = 1000;
+    int limit;
     // if true was selected, the comments of developer will be shown in console. Default is false
     public boolean showComments = false;
     // Limit of chances to improve a a variable
     int limitToStopSecondChance;
     // constructor
-    public Implementation(int dataset, boolean showComments, int limit, int limitToStopSecondChance) {
+    public Implementation(int dataset, boolean showComments, int limitTOStopOptimizingVariable, int limitToStopSecondChance) {
         selectDataset(dataset);
         this.showComments = showComments;
-        this.limit = limit;
+        this.limit = limitTOStopOptimizingVariable;
         this.limitToStopSecondChance = limitToStopSecondChance;
     }
 
@@ -393,8 +393,13 @@ public class Implementation {
         if (numberToBeRandomed == 0) {
             numberToBeRandomed = determineBestStart();
         }
-        double randomMe = numberToBeRandomed * vectorToMultiplyWithOriginalOne * new Random().nextDouble();
-        return randomMe;
+        if (new Random().nextDouble()<=0.5){
+        double randomMe = numberToBeRandomed * vectorToMultiplyWithOriginalOne * new Random().nextDouble()*-1;
+        return randomMe;}
+        else{
+            double randomMe = numberToBeRandomed * vectorToMultiplyWithOriginalOne * new Random().nextDouble();
+            return randomMe;
+        }
     }
 
     /**
@@ -491,7 +496,7 @@ public class Implementation {
              * boolean: to be placed in a array to count the
              * int the number by which a limit will be specified to stop call a varibale for further improvement
              */
-            // Print out the header of the table of records with set temperature, cooling rate, the factor to multiply and limit
+            // Print out the header of the table of records with set temperature, cooling rate, the vector to multiply and limit
             if (counterTOShowDevelopement == 0) {
                 String verticalSpace = "";
                 String start = "###########################################################";
@@ -500,7 +505,7 @@ public class Implementation {
                 tableOfFigures.add(start);
                 tableOfFigures.add(start);
                 // the form of "|" is used to be able to work filter the data on excel
-                String conditionsOfExperiment = "Best_Start_Value| " + bestStart + " |The_start_temperature| " + temp + " | the_cooling_rate| " + coolingRate + "| the_factor_to_multiply_with| " + vectorToMultiplyWith + "| The Variable limit | " + limit;
+                String conditionsOfExperiment = "Best_Start_Value| " + bestStart + " |The_start_temperature| " + temp + " | the_cooling_rate| " + coolingRate + "| vector_to_multiply_with| " + vectorToMultiplyWith + "| The Variable limit | " + limit+ "|chance_limit|"+limitToStopSecondChance ;
                 conditionsOfExperiment = conditionsOfExperiment.replace(".", ",");
 
                 tableOfFigures.add(conditionsOfExperiment);
